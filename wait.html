@@ -1,0 +1,41 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Title of the document</title>
+<style>
+*[contenteditable='true']{border-bottom:solid 2px #ccc}
+.error{border:solid 2px red}
+.success{border:solid 2px green}
+.busy{border:solid 2px black}
+
+</style>
+
+</head>
+
+<body>
+<h1 contenteditable="true" data-title="mytitle1" >1</h1>
+<h1 contenteditable="true" data-title="mytitle2">2</h1>
+<script src="js/waitinput.js"></script>
+<script>
+var counter=10;
+var waitinput = new WaitInput("*[contenteditable='true']",{
+	url:'gethint.php?data=',
+	header:'application/x-www-form-urlencoded',
+	data:{
+		id:0,
+		txt:'this.textContent',
+		title:'this.dataset.title',		
+	},
+	duration:1000
+	
+});
+
+
+
+		
+</script>
+
+</body>
+
+</html> 

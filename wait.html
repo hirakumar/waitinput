@@ -27,8 +27,7 @@ var waitinput = new WaitInput("*[contenteditable='true']",{
 		id:'this.dataset.id',
 		content:'this.dataset.content',
 		value:'this.textContent',
-		type:'this.dataset.type',
-		ss:'123'
+		type:'this.dataset.type'
 	},
 	duration:1000
 	
@@ -40,6 +39,17 @@ function changeit(){
 	ele.textContent="I am here";
 	waitinput.trigger(ele);
 }
+
+
+var obj ={ id: "2", content: "cont2", value: "v", type: "type2" };
+var str = JSON.stringify(obj);
+
+	str=str.replace(/:/g,'=');
+	str=str.replace(/,/g,'&');
+	str=str.replace(/"/g,'');
+	str=str.slice(1,-1);
+	console.log(str);
+
 
 
 		

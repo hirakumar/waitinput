@@ -81,6 +81,7 @@ class WaitInput {
 						
 						// Object into Array
 						//console.log(this.obj.data);
+						
 						var myobj = Object.entries(this.obj.data);
 						var patt = /this/i;
 						var mydata={};
@@ -97,17 +98,28 @@ class WaitInput {
 							}
 							
 						}
+						
 						console.log(mydata);
-						xmlhttp.open("POST", this.obj.url + mydata, true);
+						xmlhttp.open("POST", this.obj.url, true);
 						xmlhttp.setRequestHeader('Content-type', this.obj.header);
-						/*xmlhttp.addEventListener("loadstart",this.ajaxLoadStart.bind(this));
+						xmlhttp.addEventListener("loadstart",this.ajaxLoadStart.bind(this));
 						xmlhttp.addEventListener("progress",this.ajaxProgress.bind(this));
 						xmlhttp.addEventListener("abort",this.ajaxAbort.bind(this));
 						xmlhttp.addEventListener("error",this.ajaxError.bind(this));
 						xmlhttp.addEventListener("load",this.ajaxLoad.bind(this));
 						xmlhttp.addEventListener("timeout",this.ajaxTimeOut.bind(this));
-						xmlhttp.addEventListener("loadend",this.ajaxTimeLoadEnd.bind(this));*/
-						xmlhttp.send(); 
+						xmlhttp.addEventListener("loadend",this.ajaxTimeLoadEnd.bind(this));
+						
+						/* Object to Param */
+						var obj ={ id: "2", content: "cont2", value: "v", type: "type2" };
+						var param = JSON.stringify(obj);
+
+						param=param.replace(/:/g,'=');
+						param=param.replace(/,/g,'&');
+						param=param.replace(/"/g,'');
+						param=param.slice(1,-1);
+						console.log("Ajax Data :"+param);
+						xmlhttp.send(param); 
 		
 	}
 	ajaxAbort(e){

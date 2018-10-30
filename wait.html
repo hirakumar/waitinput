@@ -14,8 +14,10 @@
 </head>
 
 <body>
+<div id="app">
 <h1 contenteditable="true" data-title="mytitle1" id="one" data-content="cont1" data-type="type1" data-id="1">1</h1>
 <h1 contenteditable="true" data-title="mytitle2" data-id="2" data-content="cont2" data-type="type2">2</h1>
+</div>
 <button onClick="changeit()">Change it</button>
 <script src="js/waitinput.js"></script>
 <script>
@@ -35,20 +37,17 @@ var waitinput = new WaitInput("*[contenteditable='true']",{
 
 
 function changeit(){
-	var ele=document.getElementById('one');
-	ele.textContent="I am here";
-	waitinput.triggerInput(ele);
+	
+	var ele = document.createElement('div');
+	ele.innerHTML='<h1 contenteditable="true" data-title="mytitle3" data-id="3" data-content="cont3" data-type="type3">3</h1>';
+	
+	var app = document.getElementById('app');
+	app.appendChild(ele.firstChild);
+	waitinput.add();
+	
 }
 
 
-var obj ={ id: "2", content: "cont2", value: "v", type: "type2" };
-var str = JSON.stringify(obj);
-
-	str=str.replace(/:/g,'=');
-	str=str.replace(/,/g,'&');
-	str=str.replace(/"/g,'');
-	str=str.slice(1,-1);
-	console.log(str);
 
 
 

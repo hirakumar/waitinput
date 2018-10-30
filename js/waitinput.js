@@ -8,7 +8,7 @@
   \__/\  /  (____  /__||__| |___|___|  /   __/|____/ |__|  
        \/        \/                  \/|__|                
 
-	Ver : 1.0.5
+	Ver : 1.0.6
 	Date : 30th Oct 2018
 	Author : Hira Kumar Maharjan
 	Description : When user input data into content editable element and after in specific
@@ -28,27 +28,34 @@
 	duration:1000 
 	
 	});
-
+	
+	*******************
+	METHODS
+	*******************
+	1. triggerInput()
 */
 class WaitInput {
     constructor(ele,obj) {
-        this.ele = document.querySelectorAll(ele);
+        
+		this.obj=obj;
+		this.selector=ele;
+		this.ele = null;
         this.saveData = [];
         this.interval = [];
         this.intervalStatus = [];
         this.intervalTime = 1000;
         this.intEle = [];
-        this.obj=obj;
-		
-		
+		this.totalInput=0;
+        		
 		try{
 			this.obj=obj;
 			if(this.obj.duration!=undefined){
 				this.intervalTime = this.obj.duration;
-				console.log("Set Interval"+this.intervalTime);
+				
 			}
 			
 			this.init();
+			
 		}catch(err){
 			console.log("Ajax is requried on second parameter");
 			console.log(err);
@@ -56,8 +63,11 @@ class WaitInput {
 
 
     }
+	
+	add(){
+		this.init();
+	}
 	triggerInput(ele){
-		
 		ele.dispatchEvent(new Event('input'));
 	}
 	ajaxStuff(e){
@@ -144,18 +154,24 @@ class WaitInput {
 		//console.log(e);
 	}
     init() {
-
+		
+		this.ele = document.querySelectorAll(this.selector);
+		this.totalInput = this.ele.length;
+		
         var i = 0;
         while (i < this.ele.length) {
 
             // Event Trigger
 			this.ele[i].dataset.index=i;
-            this.ele[i].addEventListener('input', trigger.bind(this));
+            this.ele[i].addEventListener('input', this.trigger.bind(this));
 			
             i++;
         }
 		
-        function trigger(e) {
+        
+
+    }
+	trigger(e) {
 			e.target.classList.add('busy');
 			e.target.classList.remove('error');
 			e.target.classList.remove('success');
@@ -192,8 +208,6 @@ class WaitInput {
                 this.intervalStatus[i] = true;
             }
         }
-
-    }
 
 
 

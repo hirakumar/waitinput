@@ -56,7 +56,7 @@ class WaitInput {
 
 
     }
-	trigger(ele){
+	triggerInput(ele){
 		
 		ele.dispatchEvent(new Event('input'));
 	}

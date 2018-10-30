@@ -37,7 +37,7 @@ var waitinput = new WaitInput("*[contenteditable='true']",{
 function changeit(){
 	var ele=document.getElementById('one');
 	ele.textContent="I am here";
-	waitinput.trigger(ele);
+	waitinput.triggerInput(ele);
 }
 
 

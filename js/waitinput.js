@@ -8,8 +8,8 @@
   \__/\  /  (____  /__||__| |___|___|  /   __/|____/ |__|  
        \/        \/                  \/|__|                
 
-	Ver : 1.0.3
-	Date : 7th Oct 2018
+	Ver : 1.0.4
+	Date : 30th Oct 2018
 	Author : Hira Kumar Maharjan
 	Description : When user input data into content editable element and after in specific
 				  time duration it will call ajax
@@ -40,19 +40,23 @@ class WaitInput {
 
 
     }
+	trigger(ele){
+		
+		ele.dispatchEvent(new Event('input'));
+	}
 	ajaxStuff(e){
 		var xmlhttp = new XMLHttpRequest();
 						
 						xmlhttp.onreadystatechange = function() {
 							
 							if (this.readyState == 4 && this.status == 200) {
-								console.log("Result: "+this.responseText);
-								alert(this.responseText);
+								//console.log("Result: "+this.responseText);
+								//alert(this.responseText);
 								e.target.classList.remove('error');
 								e.target.classList.add('success');
 								e.target.classList.remove('busy');
 							}else if(this.status == 404){
-								console.log("Requested URL is invalid");
+								//console.log("Requested URL is invalid");
 								e.target.classList.add('error');
 								e.target.classList.remove('success');
 								e.target.classList.remove('busy');
@@ -60,33 +64,33 @@ class WaitInput {
 						};											
 						
 						// Object into Array
+						//console.log(this.obj.data);
 						var myobj = Object.entries(this.obj.data);
 						var patt = /this/i;
-						var mydata=[];
+						var mydata={};
 						
 						//Check this and set value
 						for(var ob of myobj){
-							console.log(ob[1]);
 							
 							if(patt.test(ob[1])){
-								console.log("Found in :"+ob);
+								//console.log("Found in :"+ob);
 								ob[1]=eval(ob[1].replace('this','e.target'));
-								mydata.push(ob);
+								mydata[ob[0]]=ob[1];
 							}else{
-								mydata.push(ob);
+								mydata[ob[0]]=ob[1];
 							}
 							
 						}
-						
+						console.log(mydata);
 						xmlhttp.open("POST", this.obj.url + mydata, true);
 						xmlhttp.setRequestHeader('Content-type', this.obj.header);
-						xmlhttp.addEventListener("loadstart",this.ajaxLoadStart.bind(this));
+						/*xmlhttp.addEventListener("loadstart",this.ajaxLoadStart.bind(this));
 						xmlhttp.addEventListener("progress",this.ajaxProgress.bind(this));
 						xmlhttp.addEventListener("abort",this.ajaxAbort.bind(this));
 						xmlhttp.addEventListener("error",this.ajaxError.bind(this));
 						xmlhttp.addEventListener("load",this.ajaxLoad.bind(this));
 						xmlhttp.addEventListener("timeout",this.ajaxTimeOut.bind(this));
-						xmlhttp.addEventListener("loadend",this.ajaxTimeLoadEnd.bind(this));
+						xmlhttp.addEventListener("loadend",this.ajaxTimeLoadEnd.bind(this));*/
 						xmlhttp.send(); 
 		
 	}
@@ -117,7 +121,7 @@ class WaitInput {
         while (i < this.ele.length) {
 
             // Event Trigger
-
+			this.ele[i].dataset.index=i;
             this.ele[i].addEventListener('input', trigger.bind(this));
 			
             i++;
@@ -127,7 +131,8 @@ class WaitInput {
 			e.target.classList.add('busy');
 			e.target.classList.remove('error');
 			e.target.classList.remove('success');
-			
+			var i = e.target.dataset.index;
+			parseInt(i);
 			
 			if(e.target.textContent==""){
 				e.target.classList.add('error');

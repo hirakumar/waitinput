@@ -14,23 +14,32 @@
 </head>
 
 <body>
-<h1 contenteditable="true" data-title="mytitle1" >1</h1>
-<h1 contenteditable="true" data-title="mytitle2">2</h1>
+<h1 contenteditable="true" data-title="mytitle1" id="one" data-content="cont1" data-type="type1" data-id="1">1</h1>
+<h1 contenteditable="true" data-title="mytitle2" data-id="2" data-content="cont2" data-type="type2">2</h1>
+<button onClick="changeit()">Change it</button>
 <script src="js/waitinput.js"></script>
 <script>
-var counter=10;
+
 var waitinput = new WaitInput("*[contenteditable='true']",{
 	url:'gethint.php?data=',
 	header:'application/x-www-form-urlencoded',
 	data:{
-		id:0,
-		txt:'this.textContent',
-		title:'this.dataset.title',		
+		id:'this.dataset.id',
+		content:'this.dataset.content',
+		value:'this.textContent',
+		type:'this.dataset.type',
+		ss:'123'
 	},
 	duration:1000
 	
 });
 
+
+function changeit(){
+	var ele=document.getElementById('one');
+	ele.textContent="I am here";
+	waitinput.trigger(ele);
+}
 
 
 		

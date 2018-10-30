@@ -13,6 +13,22 @@
 	Author : Hira Kumar Maharjan
 	Description : When user input data into content editable element and after in specific
 				  time duration it will call ajax
+	
+	Example :
+	var waitinput = new WaitInput("*[contenteditable='true']",{
+	url:'gethint.php?data=',
+	header:'application/x-www-form-urlencoded',
+	data:{
+		id:'this.dataset.id',
+		content:'this.dataset.content',
+		value:'this.textContent',
+		type:'this.dataset.type',
+		ss:'123'
+	},
+	duration:1000 
+	
+	});
+
 */
 class WaitInput {
     constructor(ele,obj) {

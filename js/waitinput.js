@@ -8,7 +8,7 @@
   \__/\  /  (____  /__||__| |___|___|  /   __/|____/ |__|  
        \/        \/                  \/|__|                
 
-	Ver : 1.0.4
+	Ver : 1.0.5
 	Date : 30th Oct 2018
 	Author : Hira Kumar Maharjan
 	Description : When user input data into content editable element and after in specific
@@ -99,7 +99,7 @@ class WaitInput {
 							
 						}
 						
-						console.log(mydata);
+						//console.log(mydata);
 						xmlhttp.open("POST", this.obj.url, true);
 						xmlhttp.setRequestHeader('Content-type', this.obj.header);
 						xmlhttp.addEventListener("loadstart",this.ajaxLoadStart.bind(this));
@@ -111,8 +111,8 @@ class WaitInput {
 						xmlhttp.addEventListener("loadend",this.ajaxTimeLoadEnd.bind(this));
 						
 						/* Object to Param */
-						var obj ={ id: "2", content: "cont2", value: "v", type: "type2" };
-						var param = JSON.stringify(obj);
+						
+						var param = JSON.stringify(mydata);
 
 						param=param.replace(/:/g,'=');
 						param=param.replace(/,/g,'&');
@@ -123,25 +123,25 @@ class WaitInput {
 		
 	}
 	ajaxAbort(e){
-		console.log(e);
+		//console.log(e);
 	}
 		ajaxError(e){
-		console.log(e);
+		//console.log(e);
 	}
 	ajaxLoad(e){
-		console.log(e);
+		//console.log(e);
 	}
 	ajaxTimeOut(e){
-		console.log(e);
+		//console.log(e);
 	}
 	ajaxTimeLoadEnd(e){
-		console.log(e);
+		//console.log(e);
 	}
 	ajaxLoadStart(e){
-		console.log(e);
+		//console.log(e);
 	}
 	ajaxProgress(e){
-		console.log(e);
+		//console.log(e);
 	}
     init() {
 
